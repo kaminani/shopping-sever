@@ -1,0 +1,18 @@
+{
+  "name": "shopping_server",
+  "description": "shopping_server app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "routes": "^2.1.0"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
