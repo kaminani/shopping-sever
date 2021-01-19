@@ -36,6 +36,7 @@ const user_login = async (req,res) => {
                     req.session["uid"]=result[0]["uid"];//将uid存入会话中
                     req.session["uname"]=result[0]["uname"];//将uname存入会话中
                     //这样就可在其他路由中直接req.session.uid就可以直接获取uid了，req.session.uname获取同理
+                    console.log(req.session);
                     res.json({type: "success",msg: "登录成功"});
                 }else{
                     res.json({type: "success",msg: "登录失败"});
@@ -49,7 +50,12 @@ const user_login = async (req,res) => {
     }
 }
 
+const get_my_user = async (req,res) => {
+    console.log(req.session["uid"])
+}
+
 module.exports = {
     add_user, //增添用户
-    user_login
+    user_login,
+    get_my_user
 };
