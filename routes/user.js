@@ -5,8 +5,8 @@ const add_user = async (req,res) => {
     try {
         const user = req.body;//获取前端传来的用户信息
         console.log(user);
-        if (user.username && user.password) {
-            pool.query("INSERT INTO user(uname,upwd) VALUES(?,?)",[ user.username, user.password ],(err,result)=>{
+        if (user.username && user.password && user.phone) {
+            pool.query("INSERT INTO user(uname,upwd,phone) VALUES(?,?,?)",[ user.username, user.password,user.phone ],(err,result)=>{
                 if(err){  //如果错误，则打印错误
                     res.json({type: "error",msg:err});
                 }else{
@@ -31,11 +31,11 @@ const user_login = async (req,res) => {
         const user = req.body;
         console.log(user);
         if (user.username && user.password) {
-            pool.query("select * from user where uname=? and upwd=?",[user.username,user.password],(err,result)=>{
+            pool.query("select * from user where uname=? and upwd=?",[user.phone,user.password],(err,result)=>{
                 if(err) throw err;
                 if(result.length>0){
                     req.session["uid"]=result[0]["uid"];//将uid存入会话中
-                    req.session["uname"]=result[0]["uname"];//将uname存入会话中
+                    req.session["phone"]=result[0]["phone"];//将uname存入会话中
                     //这样就可在其他路由中直接req.session.uid就可以直接获取uid了，req.session.uname获取同理
                     res.json({type: "success",msg: "登录成功"});
                 }else{
@@ -65,11 +65,6 @@ const get_my_user = async (req,res) => {
     }
 }
 
-// const is_login = async (req,res)=>{
-//     if (req.session["uid"]){
-
-//     }
-// }
 
 module.exports = {
     add_user, //增添用户
