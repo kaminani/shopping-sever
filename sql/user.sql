@@ -7,7 +7,7 @@ CREATE TABLE user(
 	upwd VARCHAR(32),
 	email VARCHAR(64),
 	phone VARCHAR(16) UNIQUE,
-	avatar VARCHAR(128) DEFAULT "public/img/default/avatar.png",
+	avatar VARCHAR(128),
 	user_name VARCHAR(32),
 	gender BOOL
 );
