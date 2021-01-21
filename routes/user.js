@@ -5,7 +5,7 @@ const add_user = async (req,res) => {
     try {
         const user = req.body;//获取前端传来的用户信息
         if (user.username && user.password && user.phone) {
-            pool.query("INSERT INTO user(uname,upwd,phone,avatar) VALUES(?,?,?)",[ user.username, user.password, user.phone,"/public/img/default/avatar.png" ],(err,result)=>{
+            pool.query("INSERT INTO user(uname,upwd,phone,avatar) VALUES(?,?,?,?)",[ user.username, user.password, user.phone,"/public/img/default/avatar.png" ],(err,result)=>{
                 if(err){  //如果错误，则打印错误
                     res.json({type: "error",msg:err});
                 }else{
