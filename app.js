@@ -21,8 +21,8 @@ app.all('*', function(req, res, next) {
 app.use(bodyParser.json({limit: '1024mb'}));
 app.use(bodyParser.urlencoded({limit: '1024mb', extended: true}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public'))); //托管公共文件，一般是图片之类的
-app.use(express.static(path.join(__dirname, 'dist'))); //填入前端文件夹名，托管前端文件
+app.use(express.static(path.join(__dirname, '/public'))); //托管公共文件，一般是图片之类的
+app.use(express.static(path.join(__dirname, '/dist'))); //填入前端文件夹名，托管前端文件
 
 const timestamp = new Date().getTime().toString(); //生成字符串时间戳
 app.use(session({ //session中间件,建立持久会话
