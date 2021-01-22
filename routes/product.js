@@ -3,16 +3,19 @@ const pool = require("../pool.js"); //引入mysql连接池
 const get_products = async (req,res)=>{
     try {
         const pids = req.query.pids; //是一串产品id组成的数组
-        console.log(req.query);
+        // console.log(req.query);
         const output = [];
         for (const pid of pids) {
-            await pool.query("select * from product where pid = ?",[pid],(err,result)=>{
-                if (err) {
-                    res.json({type: "error",msg: "错误:" + err});
-                }else{
-                    output.push(result[0]);
-                }
-            });
+            await new Promise((open)=>{
+                pool.query("select * from product where pid = ?",[pid],(err,result)=>{
+                    if (err) {
+                        res.json({type: "error",msg: "错误:" + err});
+                    }else{
+                        output.push(result[0]);
+                    }
+                    open();
+                }); 
+            }); 
         }
         res.json(output);
     } catch (error) {
