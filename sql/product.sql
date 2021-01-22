@@ -10,9 +10,8 @@ CREATE TABLE product(
 	spec VARCHAR(64),
 	pname VARCHAR(32),
 	category VARCHAR(32),
-	details VARCHAR(1024),
+	img VARCHAR(1024),
 	shelf_time BIGINT,
 	sold_count INT,
-    img VARCHAR(128),
 	is_onsale BOOL
 );
