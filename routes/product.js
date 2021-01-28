@@ -23,6 +23,22 @@ const get_products = async (req,res)=>{
     }
 }
 
+const get_home_product = async (req, res) => {
+    try {
+        pool.query("select * from product",[],(err,result)=>{
+            if (err) {
+                res.json({type: "error",msg: "错误:" + err});
+            }else{
+                res.json(result);
+            }
+        })
+    } catch (error) {
+        res.json({type: "error",msg: "错误:" + error})        
+    }
+
+}
+
 module.exports = {
-    get_products
+    get_products,
+    get_home_product
 };
