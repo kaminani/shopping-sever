@@ -13,7 +13,7 @@ class Jwt {
     generateToken() {
         let data = this.data;
         let created = Math.floor(Date.now() / 1000);
-        let cert = fs.readFileSync(path.join(__dirname, '../pem/private_key.pem'));//私钥 可以自己生成
+        let cert = fs.readFileSync(path.join(__dirname, './pem/private_key.pem'));//私钥 可以自己生成
         let token = jwt.sign({
             data,
             exp: created + 60 * 30,
@@ -24,7 +24,7 @@ class Jwt {
     // 校验token
     verifyToken() {
         let token = this.data;
-        let cert = fs.readFileSync(path.join(__dirname, '../pem/public_key.pem'));//公钥 可以自己生成
+        let cert = fs.readFileSync(path.join(__dirname, './pem/public_key.pem'));//公钥 可以自己生成
         let res;
         try {
             let result = jwt.verify(token, cert, {algorithms: ['RS256']}) || {};
