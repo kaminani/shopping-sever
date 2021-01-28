@@ -9,7 +9,6 @@ CREATE TABLE product(
 	price DECIMAL(10,2),
 	spec VARCHAR(64),
 	pname VARCHAR(32),
-	--类别
 	category VARCHAR(32),
 	img VARCHAR(1024),
 	shelf_time BIGINT,
