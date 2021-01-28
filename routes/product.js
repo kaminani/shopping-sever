@@ -24,8 +24,9 @@ const get_products = async (req,res)=>{
 }
 
 const get_home_product = async (req, res) => {
+    const page = req.query.page;
     try {
-        pool.query("select * from product",[],(err,result)=>{
+        pool.query("select * from product limit ? ,10",[(page-1)*10],(err,result)=>{
             if (err) {
                 res.json({type: "error",msg: "错误:" + err});
             }else{
