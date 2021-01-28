@@ -1,4 +1,5 @@
 const pool = require("../pool.js"); //引入mysql连接池
+const jwt = require("../jwt");
 
 //以下封装的箭头函数前，要加async关键字用来包装为异步
 const add_user = async (req, res) => {
@@ -35,7 +36,10 @@ const user_login = async (req, res) => {
                     req.session.uid = result[0]["uid"];//将uid存入会话中
                     req.session.phone = result[0]["phone"];//将phone存入会话中
                     //这样就可在其他路由中直接req.session.uid就可以直接获取uid了，req.session.uname获取同理
-                    res.json({ type: "success", msg: "登录成功" });
+                    // 将用户id传入并生成token
+                    const jwtObj = new jwt(result[0]["uid"]);
+                    const token = jwtObj.generateToken();
+                    res.json({ type: "success", msg: "登录成功", token:token });
                 } else {
                     res.json({ type: "error", msg: "帐号或密码不正确" });
                 }
