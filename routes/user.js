@@ -39,7 +39,7 @@ const user_login = async (req, res) => {
                     // 将用户id传入并生成token
                     const jwtObj = new jwt(result[0]["uid"]);
                     const token = jwtObj.generateToken();
-                    res.json({ type: "success", msg: "登录成功", token:token });
+                    res.json({ type: "success", msg: "登录成功", token: token });
                 } else {
                     res.json({ type: "error", msg: "帐号或密码不正确" });
                 }
@@ -67,9 +67,14 @@ const get_my_user = async (req, res) => {
     }
 }
 
+const out_user = async (req, res) => {
+    res.clearCookie('connect.sid');
+    res.json({ type: "success", msg: "操作成功" });
+}
 
 module.exports = {
     add_user, //增添用户
     user_login,
-    get_my_user
+    get_my_user,
+    out_user
 };
